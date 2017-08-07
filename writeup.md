@@ -1,8 +1,4 @@
-#**Traffic Sign Recognition** 
-
-##Writeup Template
-
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+# **Traffic Sign Recognition** 
 
 ---
 
@@ -25,29 +21,30 @@ The goals / steps of this project are the following:
 [image3]: ./writeup_examples/hist_rgb.png "Histogram RGB levels"
 [image4]: ./writeup_examples/learning_rate_1.png "Learning rate"
 [image5]: ./writeup_examples/learning_rate_2.png "Learning .005"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[image6]: ./writeup_examples/dropout.png "Dropout evaluation"
+[image7]: ./writeup_examples/top5.1.png "Top5 1-5 evaluation"
+[image8]: ./writeup_examples/top5.2.png "Top5 6-10 evaluation"
+
 
 [imagets1]: ./test_images/2764561332.1.png "Road narrows right"
-[imagets1]: ./test_images/2764561332.2.png "Bumps"
-[imagets1]: ./test_images/Achenpass.png "Bicycle crossing"
-[imagets1]: ./test_images/Road_Sign_And_Winter_Scenery.png' "Double curve"
-[imagets1]: ./test_images/Umleitung_Sackgasse_Anlieger_Frei_Baustelle_Pullach_im_Isartal.3.png "Leaves 30km/h"
+[imagets2]: ./test_images/2764561332.2.png "Bumps"
+[imagets3]: ./test_images/Achenpass.png "Bicycle crossing"
+[imagets4]: ./test_images/Road_Sign_And_Winter_Scenery.png' "Double curve"
+[imagets5]: ./test_images/Umleitung_Sackgasse_Anlieger_Frei_Baustelle_Pullach_im_Isartal.3.png "Leaves 30km/h"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
 ---
-###Writeup / README
+#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
+Link to Chris Chisolm's (my) [project code](https://github.com/chisolm/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
 
-Link to Chris Chisolm's (me) [project code](https://github.com/chisolm/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+A writeup is [available](https://github.com/chisolm/CarND-Traffic-Sign-Classifier-Project/edit/master/writeup.md), it is this file.
 
-###Data Set Summary & Exploration
+### Data Set Summary & Exploration
 
-####1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
+#### 1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
 I used the pandas library to calculate summary statistics of the traffic
 signs data set:
@@ -58,38 +55,38 @@ signs data set:
 * The shape of a traffic sign image is ?  (32, 32, 3)
 * The number of unique classes/labels in the data set is ? 43
 
-####2. Include an exploratory visualization of the dataset.
+#### 2. Include an exploratory visualization of the dataset.
 
 Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
 
 ![alt text][image1]
 
-###Design and Test a Model Architecture
+### Design and Test a Model Architecture
 
-####1. Describe how you preprocessed the image data. 
+#### 1. Describe how you preprocessed the image data. 
 
 I did very limited pre-processing of the data.  I normalized it to a -1 to 1 range.  I experimented with gray scale early in my
 development but did not see a benefit in my use.  This experiment was before I added an regularization.  At the time my model was 
 overfitting significantly on the color version, I suspect the black and white so no significant gains because it was subtracting 
-information and may have exagerated the overfitting, or results were lost in the noise.
+information and may have exaggerated the overfitting, or results were lost in the noise.
 
 I decided not to generate additional data because one of the techniques suggested was to jitter the image.  Looking at the
 images in the training set, it appears that they may have been taken from a moving vehicle based on background changes.  These
-are likley to already resemeble a jitter type of augmentation.
+are likely to already resemble a jitter type of augmentation.
 
 Augmentation by translating the apparent angle of the sign could still be useful.  I would like to experiment in the future
 with occlusion of parts of the image.  I wonder if this with have a dropout like effect forcing the network to develop 
-redundant recognication.
+redundant recognition.
 
 Brightness augmentation also may provide useful cases.  The data set has the appearance of low contrast/low intensity.
 
 ![alt text][image3]
 
 
-####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
+#### 2. Description of final model architecture.
 
 I kept my model small since I was originally developing and testing it on my mac laptop.  There was also signs that
-even the basic lenet homework exercise model was overfitting for the data in the training set.  This did not encourage
+even the basic LeNet homework exercise model was overfitting for the data in the training set.  This did not encourage
 increasing the model size.  
 
 The reduced size also greatly aided the exploration of hyperparamter changes and exploration of multiple dropout
@@ -118,23 +115,14 @@ My final model consisted of the following layers:
  
 
 
-####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
+#### 3. Describe how you trained your model.
 
 I chose a minimization of the mean softwax for my optimizer.  Originally I varied the number of epochs, but based on a design choice to
 minimize turn around time on a slower machine, I settled on a value of 20 for the number of epochs I used.  I could have further benefitted by
 creating an early exit capability.  This did affect my choices on learning rate as rates at or below 0.0001 failed to finish training within
 20 epochs.  
 
-I ran a number of tests sets that varied
-
-hyperparam['dropout'] = 'fc5fc6'
-hyperparam['conv'] = '5x5'
-hyperparam['EPOCHS'] = 20
-hyperparam['BATCH_SIZE'] = 64
-hyperparam['learning_rate'] = .0005
-hyperparam['keep_prob'] = 0.7
-
-run_batch = False
+I ran a large number of tests sets that varied the hyperparameters listed below:
 
 | Hyperparameter 	| Options         		|
 |:---------------------:|:---------------------------------------------:|
@@ -169,9 +157,15 @@ The higher accuracy models were found with the following hyperparaters sorted by
 |0.9589569158835206	| 'none', 256, 0.005, 20, 0.7	|
 |0.9587301585139061	| 'fc5fc6', 64, 0.001, 20, 0.6	|
 
-####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. 
+#### There is not a clear choice for drop out.
 
-I started with the lenet network that we used in class.  The rough relationship of image input size from the lenet example suggested to me that 
+There may be another way to graph this that would make the information clearer. Generally the runs with dropout did perform better, but there was not a clear an obvious trend.
+
+![alt text][image6]
+
+#### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. 
+
+I started with the LeNet network that we used in class.  The rough relationship of image input size from the LeNet example suggested to me that 
 it could at least come close to the solution I was looking for.  I expected to have to increase the size of the fully connected layers at least
 to cope with the increase complexity in the images.  I also suspect that I would need to do something with the convolution layers, but I did
 not know what.  I used RELU activation for all layers.
@@ -187,11 +181,9 @@ My final model results were:
 * validation set accuracy of ? 96.2%
 * test set accuracy of ? TODO
 
-###Test a Model on New Images
+### Test a Model on New Images
 
-####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
-
-Here are five German traffic signs that I found on the web:
+#### 1. Here are five German traffic signs that I found on the web:
 
 Image 1: The road narrows is difficult to resolve even for a human:
 
@@ -215,7 +207,7 @@ Image 4: This speed symbol is significantly abscrued with leaves.
 
 The first image might be difficult to classify because ...
 
-####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
+#### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
 Here are the results of the prediction:
 
@@ -223,32 +215,53 @@ Here are the results of the prediction:
 |:---------------------:|:---------------------------------------------:| 
 | Road narrows on right      	| Road narrows on right   	| 
 | Bumpy road     		| Bumpy road 			|
-| Bycycles crossing		| Bycycles crossing		|
+| Bicycles crossing		| Bicycles crossing		|
 | Double curve 	      		| Children crossing  		|
 | Speed limit 30 km/h 		| Speed limit 30 km/h 		|
 
 
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. I have an addition 5 signs not pictured here but included in the 
 notebook, the accuracy is only 6 out of 10 for 60%.  This compares poorly to the validation set accuracy of 96.2% and test set accuracy of TODO.
+
+There was considerable instability in the labeling of my set of 10 images, even when run with the same model I would frequently see changes between training.  I was re-running the same model as I was completing the writeup and
+making clean up changes to the ipython notebook.  As I ran the same configuration I would note that 1 or 2 
+labels would change.  Frequently they would change and have a high likelihood marked for that label in the
+high 5 section.
+
  
 
-####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
+#### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The code for making predictions on my final model is located in the 28th cell of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+For the first image, Speed limit (50 km/h), the model is 50% sure that this is priority road sign.  The correct sign is chosen at #2 with about 18% changes.  The image frequently is evaluated to a speed limit, less frequently to the correct limit.
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| 96.6% 			| Road narrows on right   	| 
-| 99.8% 			| Bumpy road 			|
-| 99.8% 			| Bycycles crossing		|
-| 80.1%				| Double curve 	      		| 
-| 98.7%  	 		| Speed limit 30 km/h 		|
+The second image, Road narrows on the right, is correctly identified.  The second and 3rd choices are also sign with a red bordered triangle.
 
-For the second image ... 
+The third image, bumpy road, is correct and nearly the only choice.
+
+The forth image, bicycles crossing, is correct.  Periodically this is mis-identified as another red triangle sign.
+
+The fifth image, Priority road, is correctly identified and almost always correct.
+
+
+![alt text][imagets7]
+
+The sixth image, Double curve, is almost never evaluated correctly by any model I have tested.  One potential issue is limited input data with this type.
+
+The seventh image, a No vehicles, is correctly identified.
+
+The eighth image, Speed limit (30 km/h), is incorrectly identified as a 70 km/h.  The correct label is identified as the 3rd candidate with nearly equal likelihood.  The image is significantly obscured and usually the model will still identify it.
+
+The ninth image, No vehicles, is correctly identified in this run.  I picked this image because the classifier has great difficulty with it, likely due to the artifacts obscuring some of the edges.  This image is frequently mis-classified as a stop sign or a yield sign.
+
+The tenth and last image, Priority road, is correctly identified.
+
+![alt text][imagets8]
+
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
-####1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
+#### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
+It is very difficult to tell what particular features that the classifier is using.  It certainly focuses on edges in the first layer of the convolution.
 
