@@ -15,8 +15,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./writeup_examples/label_histogram.png "histogram"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
+[image1]: ./writeup_images/label_histogram.png "histogram"
 [image3]: ./writeup_images/hist_rgb.png "Histogram RGB levels"
 [image4]: ./writeup_images/learning_rate_1.png "Learning rate"
 [image5]: ./writeup_images/learning_rate_2.png "Learning .005"
