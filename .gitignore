@@ -1,6 +1,12 @@
+.DS_Store
 data
+traffic-signs-data
+traffic-signs-data.zip
 .ipynb_checkpoints
 *.h5
 models
 *.swp
 *.p
+testrun.output.json.*
+writeup_template.md.*
+lenet*
