@@ -8,5 +8,8 @@ models
 *.swp
 *.p
 testrun.output.json.*
+testrun.output.ec2.json
 writeup_template.md.*
 lenet*
+t
+checkpoint

@@ -13,27 +13,26 @@ The goals / steps of this project are the following:
 * Summarize the results with a written report
 
 
-# TODO add images
 [//]: # (Image References)
 
 [image1]: ./writeup_examples/label_histogram.png "histogram"
 [image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./writeup_examples/hist_rgb.png "Histogram RGB levels"
-[image4]: ./writeup_examples/learning_rate_1.png "Learning rate"
-[image5]: ./writeup_examples/learning_rate_2.png "Learning .005"
-[image6]: ./writeup_examples/dropout.png "Dropout evaluation"
-[image7]: ./writeup_examples/top5.1.png "Top5 1-5 evaluation"
-[image8]: ./writeup_examples/top5.2.png "Top5 6-10 evaluation"
+[image3]: ./writeup_images/hist_rgb.png "Histogram RGB levels"
+[image4]: ./writeup_images/learning_rate_1.png "Learning rate"
+[image5]: ./writeup_images/learning_rate_2.png "Learning .005"
+[image6]: ./writeup_images/dropout.png "Dropout evaluation"
+[image7]: ./writeup_images/top5.1.png "Top5 1-5 evaluation"
+[image8]: ./writeup_images/top5.2.png "Top5 6-10 evaluation"
 
 
 [imagets1]: ./test_images/2764561332.1.png "Road narrows right"
 [imagets2]: ./test_images/2764561332.2.png "Bumps"
 [imagets3]: ./test_images/Achenpass.png "Bicycle crossing"
-[imagets4]: ./test_images/Road_Sign_And_Winter_Scenery.png' "Double curve"
+[imagets4]: ./test_images/Road_Sign_And_Winter_Scenery.png "Double curve"
 [imagets5]: ./test_images/Umleitung_Sackgasse_Anlieger_Frei_Baustelle_Pullach_im_Isartal.3.png "Leaves 30km/h"
 
 ## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
+### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
 ---
 #### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.
@@ -245,7 +244,7 @@ The forth image, bicycles crossing, is correct.  Periodically this is mis-identi
 The fifth image, Priority road, is correctly identified and almost always correct.
 
 
-![alt text][imagets7]
+![alt text][image7]
 
 The sixth image, Double curve, is almost never evaluated correctly by any model I have tested.  One potential issue is limited input data with this type.
 
@@ -257,11 +256,11 @@ The ninth image, No vehicles, is correctly identified in this run.  I picked thi
 
 The tenth and last image, Priority road, is correctly identified.
 
-![alt text][imagets8]
+![alt text][image8]
 
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
-It is very difficult to tell what particular features that the classifier is using.  It certainly focuses on edges in the first layer of the convolution.
+It is very difficult to tell what particular features that the classifier is using.  It certainly focuses on edges in the first layer of the convolution.  Beyond that it is difficult to interpret.
 

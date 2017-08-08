@@ -9,7 +9,6 @@ This project is to learn about deep neural networks and convolutional neural net
 The project uses the [German Traffic Sign Dataset](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset).
 
 All of my working code is in the [Ipython notebook](https://github.com/chisolm/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb). 
-TODO verify link
 
 A more detailed writeup is availabe in the [project writeup ](https://github.com/chisolm/CarND-Traffic-Sign-Classifier-Project/blob/master/writeup.md).
 
