@@ -175,10 +175,18 @@ I ended up with nearly the same architecture.  The only change I made was to add
 so I could experiment with dropout configurations.
 
 My final model results were:
-* training set accuracy of ? 99.5%
-* validation set accuracy of ? 96.2%
-* test set accuracy of ? TODO
+* training set accuracy of ? 99.8%
+* validation set accuracy of ? 94.9%
+* test set accuracy of ? 94.0
 
+```sh
+Training loss:  0.0108793930505
+Training Accuracy = 0.998
+Validation loss:  0.206896286689
+Validation Accuracy = 0.949
+Test loss:  0.359247296421
+Test Accuracy = 0.940
+```
 ### Test a Model on New Images
 
 #### 1. Here are five German traffic signs that I found on the web:
@@ -219,7 +227,7 @@ Here are the results of the prediction:
 
 
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. I have an addition 5 signs not pictured here but included in the 
-notebook, the accuracy is only 6 out of 10 for 60%.  This compares poorly to the validation set accuracy of 96.2% and test set accuracy of TODO.
+notebook, the accuracy is only 6 out of 10 for 60%.  This compares poorly to the validation set accuracy of 94.9% and test set accuracy of 94.0%.
 
 There was considerable instability in the labeling of my set of 10 images, even when run with the same model I would frequently see changes between training.  I was re-running the same model as I was completing the writeup and
 making clean up changes to the ipython notebook.  As I ran the same configuration I would note that 1 or 2 
